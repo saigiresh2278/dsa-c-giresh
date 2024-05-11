@@ -1,0 +1,117 @@
+#include <stdio.h>
+
+// Function to create an array
+void createArray(int arr[], int n) {
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+}
+
+// Function to insert an element at a specified position
+void insertElement(int arr[], int* n, int value, int pos) {
+    if (pos < 0 || pos > *n) {
+        printf("Invalid position for insertion.\n");
+        return;
+    }
+
+    // Shift elements to the right
+    for (int i = *n; i > pos; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[pos] = value; // Insert the new element
+    (*n)++; // Increase array size
+    printf("Element inserted.\n");
+}
+
+// Function to delete an element from a specified position
+void deleteElement(int arr[], int* n, int pos) {
+    if (pos < 0 || pos >= *n) {
+        printf("Invalid position for deletion.\n");
+        return;
+    }
+
+    // Shift elements to the left
+    for (int i = pos; i < *n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*n)--; // Decrease array size
+    printf("Element deleted.\n");
+}
+
+// Function to display the array
+void displayArray(int arr[], int n) {
+    printf("Array elements: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// Function to search for an element
+int searchElement(int arr[], int n, int value) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == value) {
+            return i; // Element found at index i
+        }
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    int n;
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[100]; // Assuming a maximum size of 100
+    createArray(arr, n);
+
+    int choice, value, pos;
+
+    do {
+        printf("Menu:\n");
+        printf("1. Display array\n");
+        printf("2. Insert element\n");
+        printf("3. Delete element\n");
+        printf("4. Search element\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                displayArray(arr, n);
+                break;
+            case 2:
+                printf("Enter the element to insert: ");
+                scanf("%d", &value);
+                printf("Enter the position to insert at: ");
+                scanf("%d", &pos);
+                insertElement(arr, &n, value, pos);
+                break;
+            case 3:
+                printf("Enter the position to delete: ");
+                scanf("%d", &pos);
+                deleteElement(arr, &n, pos);
+                break;
+            case 4:
+                printf("Enter the element to search: ");
+                scanf("%d", &value);
+                int index = searchElement(arr, n, value);
+                if (index != -1) {
+                    printf("Element found at index %d.\n", index);
+                } else {
+                    printf("Element not found.\n");
+                }
+                break;
+            case 5:
+                printf("Exiting...\n");
+                break;
+            default:
+                printf("Invalid choice. Try again.\n");
+                break;
+        }
+    } while (choice != 5);
+
+    return 0;
+}
