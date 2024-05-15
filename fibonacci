@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    int arr[] = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34}; // Fibonacci series up to the 10th term
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Fibonacci series:\n");
+    for (int i = 0; i < n; ++i) {
+        printf("%d ", arr[i]);
+    }
+
+    // Calculate the sum of the series
+    int sum = 0;
+    for (int i = 0; i < n; ++i) {
+        sum += arr[i];
+    }
+    printf("\nSum: %d\n", sum);
+
+    return 0;
+}
