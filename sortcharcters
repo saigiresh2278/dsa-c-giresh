@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+
+void sortString(char str[]) {
+    int freq[26] = {0}; 
+
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            freq[str[i] - 'a']++;
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        while (freq[i] > 0) {
+            printf("%c", i + 'a');
+            freq[i]--;
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    printf("Sorted string: ");
+    sortString(str);
+
+    return 0;
+}
