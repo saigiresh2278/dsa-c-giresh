@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+bool handleClosing(char stack[], int* top, char openBracket) {
+    if (*top == -1) {
+        return false;
+    } else if (stack[*top] != openBracket) {
+        return false;
+    } else {
+        (*top)--;
+    }
+  
+}
+bool isValid(char* s) {
+    int n = strlen(s);
+    char stack[n];
+    int top = -1;
+
+    for (int i = 0; i < n; i++) {
+        char ch = s[i];
+        if (ch == '(' || ch == '{' || ch == '[') {
+            stack[++top] = ch;
+        } else if (ch == ')') {
+            if (!handleClosing(stack, &top, '(')) {
+                return false;
+            }
+        } else if (ch == '}') {
+            if (!handleClosing(stack, &top, '{')) {
+                return false;
+            }
+        } else if (ch == ']') {
+            if (!handleClosing(stack, &top, '[')) {
+                return false;
+            }
+        }
+    }
+
+    return top == -1;
+}
+
+int main() {
+    char s[] = "(giresh)";
+    if (isValid(s)) {
+        printf("Output: true\n");
+    } else {
+        printf("Output: false\n");
+    }
+    return 0;
+}
